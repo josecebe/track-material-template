@@ -208,26 +208,19 @@
     var sideNavToggle = false;
     $(document).ready(function () {
 		$(".dropdown-button").dropdown();
-		$("#sideNav").click(function(){
-		if (!sideNavToggle) {
-    			sideNavToggle = true;
-    			if($(this).hasClass('closed')){
-    				$('.navbar-side').animate({left: '0px'}, function() {
-    					sideNavToggle = false;
-    				});
-    				$(this).removeClass('closed');
-    				$('#page-wrapper').animate({'margin-left' : '260px'});
-    				
-    			}
-    			else{
-    			    $(this).addClass('closed');
-    				$('.navbar-side').animate({left: '-260px'}, function() {
-                        sideNavToggle = false;
-                    });
-    				$('#page-wrapper').animate({'margin-left' : '0px'}); 
-    			}
+        $("#sideNav, #sideNavMob").click(function(){
+        if (!sideNavToggle) {
+                sideNavToggle = true;
+                if (!$("body").hasClass("menuOpen")) {
+                    $("body").addClass("menuOpen");
+                } else {
+                    $("body").removeClass("menuOpen");
+                }
+                setTimeout(function() {
+                    sideNavToggle = false;
+                }, 300);
             }
-		});
+        });
 		
         mainApp.initFunction(); 
     });
